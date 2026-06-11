@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagnóstico do Casal — O Jantar Financeiro</title>
+<!-- Google Tag Manager (server-side) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://api.leticiakratka.com.br/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N9GCCZSW');</script>
+<!-- End Google Tag Manager -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -426,6 +433,10 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://api.leticiakratka.com.br/ns.html?id=GTM-N9GCCZSW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="header">
   <div class="header-tag">O Jantar Financeiro · Diagnóstico do Casal</div>
@@ -570,11 +581,12 @@
 
       <div class="field" id="f-renda">
         <div class="options" id="opcoes-renda">
-          <div class="option" data-value="ate-7k"><div class="option-radio"></div><div class="option-text"><div class="option-title">Até R$ 7.000</div></div></div>
-          <div class="option" data-value="7k-15k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 7.000 a R$ 15.000</div></div></div>
-          <div class="option" data-value="15k-30k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 15.000 a R$ 30.000</div></div></div>
-          <div class="option" data-value="30k-60k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 30.000 a R$ 60.000</div></div></div>
-          <div class="option" data-value="acima-60k"><div class="option-radio"></div><div class="option-text"><div class="option-title">Acima de R$ 60.000</div></div></div>
+          <div class="option" data-value="ate-5k"><div class="option-radio"></div><div class="option-text"><div class="option-title">Até R$ 5.000</div></div></div>
+          <div class="option" data-value="5k-7k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 5.000 a R$ 7.000</div></div></div>
+          <div class="option" data-value="7k-12k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 7.000 a R$ 12.000</div></div></div>
+          <div class="option" data-value="12k-18k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 12.000 a R$ 18.000</div></div></div>
+          <div class="option" data-value="18k-50k"><div class="option-radio"></div><div class="option-text"><div class="option-title">De R$ 18.000 a R$ 50.000</div></div></div>
+          <div class="option" data-value="acima-50k"><div class="option-radio"></div><div class="option-text"><div class="option-title">Acima de R$ 50.000</div></div></div>
         </div>
         <input type="hidden" name="renda" id="input-renda">
         <div class="field-error">Selecione uma opção.</div>
@@ -709,12 +721,15 @@
   // Faça uma cópia do apps-script.gs, publique como Web App e cole a URL /exec aqui.
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSKRscQgJ0VcSALKwkJ0lfjWn6al9_eR090nTsqY5Ra0S7mkTVPyVkOidDF7SNooSG_w/exec';
 
-  // Qualificação para a sessão de diagnóstico (call com a Vanessa):
-  // renda combinada ACIMA de R$ 7.000 (ou seja, qualquer faixa menos "até 7k").
-  const RENDAS_ALTO = ['7k-15k', '15k-30k', '30k-60k', 'acima-60k'];
+  // Qualificação para a sessão de diagnóstico (interesse "sim" ou "talvez"):
+  // renda combinada de 7k a 18k = agenda da Vanessa
+  // renda combinada acima de 18k = agenda da Letícia
+  const RENDAS_VANESSA = ['7k-12k', '12k-18k'];
+  const RENDAS_LETICIA = ['18k-50k', 'acima-50k'];
 
   // Destinos
-  const URL_AGENDAMENTO_CALL = 'https://calendar.app.google/gRKzU7t9hUxswPwb8'; // CONFIRMAR: agenda da Vanessa (diagnóstico)
+  const URL_AGENDAMENTO_VANESSA = 'https://calendar.app.google/gRKzU7t9hUxswPwb8';
+  const URL_AGENDAMENTO_LETICIA = 'https://calendar.app.google/HdEe5HMMkn7B3JDZ7';
   const WHATSAPP_JEANE = '5561999245689';
   const MSG_WHATSAPP_JEANE = 'Oi Jeane! Acabei de entrar no O Jantar Financeiro e preenchi o diagnóstico do casal. Quero saber mais sobre o próximo passo pra gente.';
 
@@ -747,6 +762,11 @@
         giftTitle: 'Sessão de Diagnóstico do Casal · 1 hora',
         giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza do que está travando o patrimônio.'
       },
+      call_leticia: {
+        lead: 'Vocês me contaram que {situacao}. <strong>O que separa o casal que constrói patrimônio junto nunca foi quanto ganha, foi ter um plano comum.</strong> Pelo momento de vocês, essa conversa eu quero fazer pessoalmente: na sessão, eu apresento o <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra transformar a renda em patrimônio de verdade. Sem custo.',
+        giftTitle: 'Sessão de Diagnóstico do Casal com a Letícia · 1 hora',
+        giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza do que está travando o patrimônio.'
+      },
       whats_sim: {
         title: 'A Jeane vai chamar vocês',
         lead: 'Vocês me contaram que {situacao}. Existe um <strong>caminho com etapas claras</strong> pra transformar o que vocês querem em quanto, onde e quando. A Jeane vai chamar vocês no WhatsApp.'
@@ -761,6 +781,11 @@
       call: {
         lead: 'Vocês me contaram que {situacao}. <strong>Vocês já construíram, agora é dar coerência ao que têm.</strong> Na sessão, a Vanessa, planejadora do nosso time, vai apresentar um <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra essa próxima fase. Sem custo.',
         giftTitle: 'Sessão de Diagnóstico do Casal · 1 hora',
+        giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza pra essa próxima fase.'
+      },
+      call_leticia: {
+        lead: 'Vocês me contaram que {situacao}. <strong>Vocês já construíram, agora é dar coerência ao que têm.</strong> Pelo momento de vocês, essa conversa eu quero fazer pessoalmente: na sessão, eu apresento o <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra essa próxima fase. Sem custo.',
+        giftTitle: 'Sessão de Diagnóstico do Casal com a Letícia · 1 hora',
         giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza pra essa próxima fase.'
       },
       whats_sim: {
@@ -910,24 +935,29 @@
     if (interesse === 'nao') {
       return { step: '9c' };
     }
-    // Sim ou Talvez + renda combinada acima de 7k = ganha sessão com a Vanessa
-    if (RENDAS_ALTO.includes(renda)) {
-      return { step: '9a' };
+    // Sim ou Talvez + renda acima de 18k = sessão direto com a Letícia
+    if (RENDAS_LETICIA.includes(renda)) {
+      return { step: '9a', destino: 'leticia' };
+    }
+    // Sim ou Talvez + renda de 7k a 18k = sessão com a Vanessa
+    if (RENDAS_VANESSA.includes(renda)) {
+      return { step: '9a', destino: 'vanessa' };
     }
     // Sim ou Talvez + renda até 7k = Jeane no WhatsApp (nutrição)
     return { step: '9b' };
   }
 
-  function personalizarResultado(step, situacao, interesse) {
+  function personalizarResultado(step, situacao, interesse, destino) {
     const perfil = PERFIL_POR_SITUACAO[situacao] || 'construir';
     const reforco = SITUACAO_REFORCO[situacao] || '';
     const pitch = PITCH[perfil];
 
     if (step === '9a') {
+      const call = destino === 'leticia' ? pitch.call_leticia : pitch.call;
       document.getElementById('lead9a').innerHTML =
-        pitch.call.lead.replace('{situacao}', reforco);
-      document.getElementById('giftTitle9a').innerHTML = pitch.call.giftTitle;
-      document.getElementById('giftDesc9a').innerHTML = pitch.call.giftDesc;
+        call.lead.replace('{situacao}', reforco);
+      document.getElementById('giftTitle9a').innerHTML = call.giftTitle;
+      document.getElementById('giftDesc9a').innerHTML = call.giftDesc;
     } else if (step === '9b') {
       const variant = interesse === 'talvez' ? pitch.whats_talvez : pitch.whats_sim;
       document.getElementById('title9b').textContent = variant.title;
@@ -990,13 +1020,13 @@
     if (enviado) {
       const info = getRedirectInfo(renda, patrimonio, interesse);
 
-      // Personaliza pitch da tela final conforme perfil detectado e interesse
-      personalizarResultado(info.step, situacaoCodigo, interesse);
+      // Personaliza pitch da tela final conforme perfil detectado, interesse e destino
+      personalizarResultado(info.step, situacaoCodigo, interesse, info.destino);
 
       // Configura CTAs do resultado (só os que existem)
       const btnCall = document.getElementById('btnAgendarCall');
       const btnWhats = document.getElementById('btnWhatsJeane');
-      if (btnCall) btnCall.href = URL_AGENDAMENTO_CALL;
+      if (btnCall) btnCall.href = info.destino === 'leticia' ? URL_AGENDAMENTO_LETICIA : URL_AGENDAMENTO_VANESSA;
       if (btnWhats) btnWhats.href = 'https://wa.me/' + WHATSAPP_JEANE + '?text=' + encodeURIComponent(MSG_WHATSAPP_JEANE);
 
       goToStep(info.step);
