@@ -760,13 +760,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const PITCH = {
     construir: {
       call: {
-        lead: 'Vocês me contaram que {situacao}. <strong>O que separa o casal que constrói patrimônio junto nunca foi quanto ganha, foi ter um plano comum.</strong> Na sessão, a Vanessa, planejadora do nosso time, vai apresentar um <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra transformar a renda em patrimônio de verdade. Sem custo.',
+        lead: 'Vocês me contaram que {situacao}. <strong>O que separa o casal que constrói patrimônio junto nunca foi quanto ganha, foi ter um plano comum.</strong> Na sessão com um dos planejadores da nossa equipe, vocês recebem o <strong>diagnóstico do momento financeiro de vocês</strong> e, se fizer sentido, uma <strong>proposta de consultoria financeira personalizada</strong> pra transformar a renda em patrimônio de verdade.',
         giftTitle: 'Sessão de Diagnóstico do Casal · 1 hora',
-        giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza do que está travando o patrimônio.'
-      },
-      call_leticia: {
-        lead: 'Vocês me contaram que {situacao}. <strong>O que separa o casal que constrói patrimônio junto nunca foi quanto ganha, foi ter um plano comum.</strong> Pelo momento de vocês, essa conversa eu quero fazer pessoalmente: na sessão, eu apresento o <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra transformar a renda em patrimônio de verdade. Sem custo.',
-        giftTitle: 'Sessão de Diagnóstico do Casal com a Letícia · 1 hora',
         giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza do que está travando o patrimônio.'
       },
       whats_sim: {
@@ -781,13 +776,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     },
     otimizar: {
       call: {
-        lead: 'Vocês me contaram que {situacao}. <strong>Vocês já construíram, agora é dar coerência ao que têm.</strong> Na sessão, a Vanessa, planejadora do nosso time, vai apresentar um <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra essa próxima fase. Sem custo.',
+        lead: 'Vocês me contaram que {situacao}. <strong>Vocês já construíram, agora é dar coerência ao que têm.</strong> Na sessão com um dos planejadores da nossa equipe, vocês recebem o <strong>diagnóstico do momento financeiro de vocês</strong> e, se fizer sentido, uma <strong>proposta de consultoria financeira personalizada</strong> pra essa próxima fase.',
         giftTitle: 'Sessão de Diagnóstico do Casal · 1 hora',
-        giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza pra essa próxima fase.'
-      },
-      call_leticia: {
-        lead: 'Vocês me contaram que {situacao}. <strong>Vocês já construíram, agora é dar coerência ao que têm.</strong> Pelo momento de vocês, essa conversa eu quero fazer pessoalmente: na sessão, eu apresento o <strong>diagnóstico do momento financeiro de vocês</strong> e uma <strong>proposta de solução personalizada</strong> pra essa próxima fase. Sem custo.',
-        giftTitle: 'Sessão de Diagnóstico do Casal com a Letícia · 1 hora',
         giftDesc: 'Vocês saem com o <strong>diagnóstico do momento de vocês</strong>, o <strong>direcionamento do próximo passo</strong> e clareza pra essa próxima fase.'
       },
       whats_sim: {
@@ -946,7 +936,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const pitch = PITCH[perfil];
 
     if (step === '9a') {
-      const call = destino === 'leticia' ? pitch.call_leticia : pitch.call;
+      const call = pitch.call;
       document.getElementById('lead9a').innerHTML =
         call.lead.replace('{situacao}', reforco);
       document.getElementById('giftTitle9a').innerHTML = call.giftTitle;
