@@ -724,10 +724,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // Qualificação para a sessão de diagnóstico (interesse "sim" ou "talvez"):
   // renda combinada de 7k a 18k = agenda da Vanessa
   // renda combinada acima de 18k = agenda da Letícia
-  const RENDAS_VANESSA = ['7k-12k', '12k-18k'];
-  const RENDAS_LETICIA = ['18k-50k', 'acima-50k'];
+  const RENDAS_PAULO   = ['7k-12k'];
+  const RENDAS_VANESSA = ['12k-18k', '18k-50k'];
+  const RENDAS_LETICIA = ['acima-50k'];
 
   // Destinos
+  const URL_AGENDAMENTO_PAULO   = 'https://calendar.app.google/rBLtrzhsg6pTGgw57';
   const URL_AGENDAMENTO_VANESSA = 'https://calendar.app.google/gRKzU7t9hUxswPwb8';
   const URL_AGENDAMENTO_LETICIA = 'https://calendar.app.google/HdEe5HMMkn7B3JDZ7';
   const WHATSAPP_JEANE = '5561999245689';
@@ -931,19 +933,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function getRedirectInfo(renda, patrimonio, interesse) {
-    // Não = respeita a decisão, sem CTA
-    if (interesse === 'nao') {
-      return { step: '9c' };
-    }
-    // Sim ou Talvez + renda acima de 18k = sessão direto com a Letícia
-    if (RENDAS_LETICIA.includes(renda)) {
-      return { step: '9a', destino: 'leticia' };
-    }
-    // Sim ou Talvez + renda de 7k a 18k = sessão com a Vanessa
-    if (RENDAS_VANESSA.includes(renda)) {
-      return { step: '9a', destino: 'vanessa' };
-    }
-    // Sim ou Talvez + renda até 7k = Jeane no WhatsApp (nutrição)
+    if (interesse === 'nao') return { step: '9c' };
+    if (RENDAS_LETICIA.includes(renda)) return { step: '9a', destino: 'leticia' };
+    if (RENDAS_VANESSA.includes(renda)) return { step: '9a', destino: 'vanessa' };
+    if (RENDAS_PAULO.includes(renda)) return { step: '9a', destino: 'paulo' };
     return { step: '9b' };
   }
 
@@ -1026,7 +1019,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // Configura CTAs do resultado (só os que existem)
       const btnCall = document.getElementById('btnAgendarCall');
       const btnWhats = document.getElementById('btnWhatsJeane');
-      if (btnCall) btnCall.href = info.destino === 'leticia' ? URL_AGENDAMENTO_LETICIA : URL_AGENDAMENTO_VANESSA;
+      if (btnCall) {
+        if (info.destino === 'leticia') btnCall.href = URL_AGENDAMENTO_LETICIA;
+        else if (info.destino === 'paulo') btnCall.href = URL_AGENDAMENTO_PAULO;
+        else btnCall.href = URL_AGENDAMENTO_VANESSA;
+      }
       if (btnWhats) btnWhats.href = 'https://wa.me/' + WHATSAPP_JEANE + '?text=' + encodeURIComponent(MSG_WHATSAPP_JEANE);
 
       goToStep(info.step);
